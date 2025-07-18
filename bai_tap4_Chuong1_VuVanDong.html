@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f2f5;
+        }
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px; /* Adjusted max-width to fit the layout */
+            margin: auto;
+        }
+        fieldset {
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            padding: 15px 20px;
+        }
+        legend {
+            font-weight: bold;
+            color: #333;
+            padding: 0 10px;
+            font-size: 1.1em;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            flex: 0 0 150px; /* Fixed width for labels */
+            margin-right: 15px;
+            text-align: right;
+            font-weight: bold;
+            color: #555;
+            padding-top: 2px; /* Slight adjustment for alignment */
+        }
+        .form-group .input-wrapper {
+            flex: 1; /* Input fields take remaining space */
+            display: flex; /* For input + icon */
+            align-items: center;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="date"],
+        .form-group input[type="tel"],
+        .form-group select {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.95em;
+        }
+        .form-group .radio-group,
+        .form-group .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between options */
+            flex: 1;
+        }
+        .form-group .radio-group label,
+        .form-group .checkbox-group label {
+            flex: unset; /* Override fixed width for radio/checkbox labels */
+            text-align: left;
+            font-weight: normal;
+            margin-right: 0;
+            cursor: pointer;
+        }
+        .form-group .radio-group input,
+        .form-group .checkbox-group input {
+            margin-right: 5px;
+        }
+        .form-group .icon-button {
+            background: none;
+            border: 1px solid #ccc;
+            padding: 6px 8px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .form-group .icon-button:hover {
+            background-color: #eee;
+        }
+        .form-group .help-icon {
+            margin-left: 8px;
+            font-size: 1.2em;
+            color: #666;
+            cursor: help;
+        }
+
+        /* Notes Editor Specific Styles */
+        .notes-editor-container {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden; /* For toolbar */
+            background-color: #f9f9f9;
+        }
+        .notes-toolbar {
+            background-color: #e9e9e9;
+            padding: 6px 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap; /* Allow toolbar items to wrap */
+        }
+        .notes-toolbar button {
+            background: none;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .notes-toolbar button:hover {
+            background-color: #dcdcdc;
+        }
+        textarea {
+            width: 100%;
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 120px;
+            font-size: 0.95em;
+            line-height: 1.4;
+            background-color: #fff;
+        }
+
+        /* CAPTCHA Specific Styles */
+        .captcha-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        .captcha-text {
+            font-family: 'Courier New', monospace; /* Monospaced font for CAPTCHA */
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            user-select: none; /* Prevent text selection */
+            min-width: 100px;
+            text-align: center;
+        }
+        .captcha-input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.95em;
+            min-width: 150px; /* Ensure input doesn't get too small */
+        }
+        .captcha-note {
+            font-size: 0.85em;
+            color: #888;
+            margin-left: 5px;
+        }
+        .required-text {
+            color: red;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+
+        /* Button Group */
+        .button-group {
+            text-align: right;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .button-group button {
+            padding: 10px 25px;
+            margin-left: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+        .button-group button.submit-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .button-group button.submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .button-group button.cancel-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        .button-group button.cancel-btn:hover {
+            background-color: #5a6268;
+        }
+        .button-group .icon {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" method="post">
+        <fieldset>
+            <legend>Basic Info</legend>
+
+            <div class="form-group">
+                <label for="employeeId">Employee ID</label>
+                <div class="input-wrapper">
+                    <input type="text" id="employeeId" name="employeeId" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <div class="input-wrapper">
+                    <input type="text" id="lastName" name="lastName" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <div class="input-wrapper">
+                    <input type="text" id="firstName" name="firstName" value="">
+                    <button type="button" class="icon-button">☐</button> </div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="Male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="Female" checked>
+                    <label for="female">Female</label>
+                    <input type="radio" id="gender-xxx" name="gender" value="XXX">
+                    <label for="gender-xxx">XXX</label>
+                    <input type="radio" id="gender-zzz" name="gender" value="ZZZ">
+                    <label for="gender-zzz">ZZZ</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <div class="input-wrapper">
+                    <input type="text" id="title" name="title" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="suffix">Suffix</label>
+                <div class="input-wrapper">
+                    <input type="text" id="suffix" name="suffix" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birthDate">BirthDate</label>
+                <div class="input-wrapper">
+                    <input type="date" id="birthDate" name="birthDate" value="">
+                    <span class="help-icon">?</span> </div>
+            </div>
+
+            <div class="form-group">
+                <label for="hireDate">HireDate</label>
+                <div class="input-wrapper">
+                    <input type="date" id="hireDate" name="hireDate" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ssn">SSN # (if applicable)</label>
+                <div class="input-wrapper">
+                    <input type="text" id="ssn" name="ssn" placeholder="XXX-XX-XXXX">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="reportsTo">Reports To</label>
+                <div class="input-wrapper">
+                    <input type="text" id="reportsTo" name="reportsTo" value="">
+                    <button type="button" class="icon-button">▼</button> </div>
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <div class="input-wrapper">
+                    <input type="text" id="photo" name="photo" value="">
+                    </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact Info</legend>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <div class="input-wrapper">
+                    <input type="text" id="address" name="address" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <div class="input-wrapper">
+                    <input type="text" id="city" name="city" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="region">Region</label>
+                <div class="input-wrapper">
+                    <input type="text" id="region" name="region" placeholder="Region">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="postalCode">Postal Code</label>
+                <div class="input-wrapper">
+                    <input type="text" id="postalCode" name="postalCode" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country</label>
+                <div class="input-wrapper">
+                    <select id="country" name="country">
+                        <option value="">--Select Country--</option>
+                        <option value="US">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="RU" selected>Russian Federation</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="homePhone">US Home Phone</label>
+                <div class="input-wrapper">
+                    <input type="tel" id="homePhone" name="homePhone" value="" placeholder="(XXX)XXX-XXXX">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Optional Info</legend>
+
+            <div class="form-group" style="align-items: flex-start;"> <label for="notes">Notes</label>
+                <div class="notes-editor-container">
+                    <div class="notes-toolbar">
+                        <button type="button">B</button>
+                        <button type="button">I</button>
+                        <button type="button">S</button>
+                        <button type="button">U</button>
+                        <button type="button">X</button>
+                        <button type="button">X</button>
+                        <button type="button">H1</button>
+                        <button type="button">H2</button>
+                        <button type="button">H3</button>
+                        <button type="button">X</button>
+                        <button type="button">C</button>
+                        <button type="button">Ξ</button>
+                        <button type="button">=</button>
+                    </div>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Preferred Shift</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="regularShift" name="preferredShift[]" value="Regular">
+                    <label for="regularShift">Regular</label>
+                    <input type="checkbox" id="gravyYardShift" name="preferredShift[]" value="Gravy Yard" checked>
+                    <label for="gravyYardShift">Gravy Yard</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="active">Active?</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="active" name="active" value="yes" checked>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="areYouHuman">Are you human?</label>
+                <div class="captcha-group">
+                    <span class="captcha-text">TIDAWO</span>
+                    <input type="text" id="areYouHuman" name="areYouHuman" class="captcha-input" required>
+                    <span class="captcha-note">Click to change</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="button-group">
+            <span class="required-text">* required</span>
+            <button type="submit" class="submit-btn"><span class="icon">▼</span> Submit</button>
+            <button type="reset" class="cancel-btn"><span class="icon">✖</span> Cancel</button>
+        </div>
+    </form>
+
+</body>
+</html>
