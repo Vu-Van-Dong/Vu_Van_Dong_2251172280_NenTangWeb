@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Employees</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">TLU</a>
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Employees</a></li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Manage Employees -->
+  <div class="container mt-4">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center header-custom">
+        <h5 class="mb-0 text-white">Manage <strong>Employees</strong></h5>
+        <div>
+          <button class="btn btn-danger"><i class="bi bi-trash"></i> Delete</button>
+          <!-- ✅ Nút mở modal -->
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+            <i class="bi bi-person-plus"></i> Add New Employee
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0" id="employeeTable">
+          <thead class="table-light">
+            <tr>
+              <th><input type="checkbox"></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Nguyen Van A</td>
+    <td>vana@mail.com</td>
+    <td>Hà Nội</td>
+    <td>0912345678</td>
+    <td>
+      <i class="bi bi-pencil-fill text-warning me-2"></i>
+      <i class="bi bi-trash-fill text-danger"></i>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Tran Thi B</td>
+    <td>thib@mail.com</td>
+    <td>TP.HCM</td>
+    <td>0987654321</td>
+    <td>
+      <i class="bi bi-pencil-fill text-warning me-2"></i>
+      <i class="bi bi-trash-fill text-danger"></i>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Le Van C</td>
+    <td>vanc@mail.com</td>
+    <td>Đà Nẵng</td>
+    <td>0901122334</td>
+    <td>
+      <i class="bi bi-pencil-fill text-warning me-2"></i>
+      <i class="bi bi-trash-fill text-danger"></i>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Pham Thi D</td>
+    <td>thid@mail.com</td>
+    <td>Cần Thơ</td>
+    <td>0933445566</td>
+    <td>
+      <i class="bi bi-pencil-fill text-warning me-2"></i>
+      <i class="bi bi-trash-fill text-danger"></i>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="checkbox"></td>
+    <td>Hoang Van E</td>
+    <td>vane@mail.com</td>
+    <td>Hải Phòng</td>
+    <td>0977558899</td>
+    <td>
+      <i class="bi bi-pencil-fill text-warning me-2"></i>
+      <i class="bi bi-trash-fill text-danger"></i>
+    </td>
+  </tr>
+</tbody>
+
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="d-flex justify-content-between align-items-center p-2">
+        <span>Showing 5 out of 25 entries</span>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item active"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Modal Add Employee -->
+  <div class="modal fade" id="addEmployeeModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="employeeForm">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <textarea class="form-control" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-success" id="addEmployeeBtn">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
