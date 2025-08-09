@@ -1,0 +1,165 @@
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+/* Căn giữa toàn bộ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Card form */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 25px;
+  margin: 20px auto;
+}
+
+.card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #1e88e5;
+  box-shadow: 0 0 0 3px rgba(30,136,229,0.25);
+  outline: none;
+}
+
+/* Nút */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-add {
+  background-color: #1e88e5;
+  color: #fff;
+}
+
+.btn-add:hover {
+  background-color: #1565c0;
+}
+
+.btn-edit {
+  background-color: #ffb300;
+  color: #000;
+  margin-right: 5px;
+}
+
+.btn-edit:hover {
+  background-color: #e6a000;
+}
+
+.btn-delete {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background-color: #c62828;
+}
+
+/* Bảng */
+.table-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin: 20px auto;
+  overflow-x: auto;
+}
+
+.table-container h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+thead {
+  background-color: #1e88e5;
+  color: white;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f1f5fb;
+}
+
+tbody tr:hover {
+  background-color: #e3f2fd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card, .table-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  input, select {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
